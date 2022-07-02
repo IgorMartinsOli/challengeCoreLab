@@ -12,7 +12,7 @@ connection
         console.log(err);
     })
 
-app.use('/vehicle', vechicleController);
+app.use('/', vechicleController);
 
 app.listen(8008, () => {
         console.log('listening on 8008');

@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     })
 }),
 
-router.get('/new', (req, res) => {
+router.post('/new', (req, res) => {
     const name = req.params.name;
     const brand = req.params.brand;
     const color = req.params.color;
@@ -26,7 +26,7 @@ router.get('/new', (req, res) => {
         board: board,
         isFavorite: false
     }).then(sucess =>{
-        return res.status(200).json(sucess);
+        return res.status(200).json({msg:"success adding book"});
     }).catch(err => {
         res.status(400).json({msg: "Erro ao criar livro", err: err.message});
     })
