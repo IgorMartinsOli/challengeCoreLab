@@ -1,8 +1,13 @@
-const express = require('express');
-const app = express();
-const connection = require('./database/database');
-const Vehicle = require('./Vehicle/vechicle');
-const vechicleController = require('./Vehicle/vehicleController');
+var express = require('express');
+var app = express();
+var connection = require('./database/database');
+var Vehicle = require('./Vehicle/vechicle');
+var vechicleController = require('./Vehicle/vehicleController');
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(express.json());
 
 connection
     .authenticate()

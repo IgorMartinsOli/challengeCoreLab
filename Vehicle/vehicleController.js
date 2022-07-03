@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     .then(vechicles => {
         return res.status(200).json(vechicles);
     }).catch(err => {
-        res.status(204).json({msg: "Erro ao buscar veiculos", err: err.message});
+        return res.status(204).json({msg: "Erro ao buscar veiculos", err: err.message});
     })
 }),
 
@@ -28,12 +28,48 @@ router.post('/new', (req, res) => {
     }).then(sucess =>{
         return res.status(200).json({msg:"success adding book"});
     }).catch(err => {
-        res.status(400).json({msg: "Erro ao criar livro", err: err.message});
+        return res.status(400).json({msg: "Erro ao criar livro", err: err.message});
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+    if(id !== undefined || id !== null) {
+        if(!isNaN(id)){
+            Vehicle.destroy({
+                where: {id: id}
+            }).then(() => {
+                return res.status(200).json({msg: "Vehicle destroyed successfully"})
+            }).catch(err => {
+                return res.status(400).json({msg: "Não foi possivel excluit veiculo", err: err.message});
+            })
+        }
+    }else{
+        return res.status(400).json({msg: "Erro ao excluir veiculo, id invalido"});
+    }
+})
 
+router.post('/update', (req, res) => {
+    const id = req.body.id;
+    let name = req.body.name;
+    let brand = req.body.brand;
+    let color = req.body.color;
+    let year = req.body.year;
+    let board = req.body.board;
+    
+    Vehicle.update({
+        name: name,
+        brand: brand,
+        color: color,
+        year: year,
+        board: board},
+        {where:{id: id}
+    }).then(() => {
+            return res.status(200).json({msg: "Sucesso ao atualizar vehicle"})
+        }
+    ).catch(err => {
+        return res.status(400).json({msg: "Erro ao atualizar vehicle", err: err.message});
+    })
 })
 
 module.exports = router;

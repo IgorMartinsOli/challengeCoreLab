@@ -1,12 +1,13 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let mocha = require('mocha');
-let expect = chai.expect;
+var expect = chai.expect;
 const baseUrl = 'http://localhost:8008';
 
 chai.use(chaiHttp);
 
 let vehicleTest = {
+    id: 1,
     name: "Celta",
     brand: "Fiat",
     color: "green",
@@ -22,5 +23,15 @@ describe('vehicles test', () => {
             expect(res).to.have.status(200);
             done();
         })
-    });
+    })
+
+    it('Update vehicle', () => {
+        chai.request(baseUrl)
+        .get('/vechicle/update')
+        .send(vehicleTest)
+        .end((err, res) => {
+            expect(err).to.have.status(200);
+            done();
+        })
+    })
 })
