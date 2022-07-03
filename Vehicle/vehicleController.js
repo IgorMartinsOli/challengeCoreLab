@@ -12,11 +12,11 @@ router.get('/', (req, res) => {
 }),
 
 router.post('/new', (req, res) => {
-    const name = req.params.name;
-    const brand = req.params.brand;
-    const color = req.params.color;
-    const year = req.params.year;
-    const board = req.params.board;
+    const name = req.body.name;
+    const brand = req.body.brand;
+    const color = req.body.color;
+    const year = req.body.year;
+    const board = req.body.board;
 
     Vehicle.create({
         name: name,
@@ -30,6 +30,10 @@ router.post('/new', (req, res) => {
     }).catch(err => {
         res.status(400).json({msg: "Erro ao criar livro", err: err.message});
     })
+})
+
+router.delete('/:id', (req, res) => {
+
 })
 
 module.exports = router;
