@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     .then(vechicles => {
         return res.status(200).json(vechicles);
     }).catch(err => {
-        return res.status(204).json({msg: "Erro ao buscar veiculos", err: err.message});
+        return res.status(204).json({msg: "Error when searching for vehicles", err: err.message});
     })
 }),
 
@@ -28,7 +28,7 @@ router.post('/new', (req, res) => {
     }).then(sucess =>{
         return res.status(200).json({msg:"success adding book"});
     }).catch(err => {
-        return res.status(400).json({msg: "Erro ao criar livro", err: err.message});
+        return res.status(400).json({msg: "Error creating vehicle", err: err.message});
     })
 })
 
@@ -39,18 +39,18 @@ router.delete('/delete/:id', (req, res) => {
             Vehicle.destroy({
                 where: {id: id}
             }).then(() => {
-                return res.status(200).json({msg: "Vehicle destroyed successfully"})
+                return res.status(200).json({msg: "Vehicle destroyed successfully"});
             }).catch(err => {
-                return res.status(400).json({msg: "Não foi possivel excluit veiculo", err: err.message});
+                return res.status(400).json({msg: "Unable to delete vehicle", err: err.message});
             })
         }
     }else{
-        return res.status(400).json({msg: "Erro ao excluir veiculo, id invalido"});
+        return res.status(400).json({msg: "Error deleting vehicle, invalid id"});
     }
 })
 
 router.post('/update', (req, res) => {
-    const id = req.body.id;
+    let id = req.body.id;
     let name = req.body.name;
     let brand = req.body.brand;
     let color = req.body.color;
@@ -65,10 +65,10 @@ router.post('/update', (req, res) => {
         board: board},
         {where:{id: id}
     }).then(() => {
-            return res.status(200).json({msg: "Sucesso ao atualizar vehicle"})
+            return res.status(200).json({msg: "Success when updating vehicle"})
         }
     ).catch(err => {
-        return res.status(400).json({msg: "Erro ao atualizar vehicle", err: err.message});
+        return res.status(400).json({msg: "Error updating vehicle", err: err.message});
     })
 })
 
