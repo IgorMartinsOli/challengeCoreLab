@@ -5,6 +5,7 @@ const { QueryTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 const db = require('../database/database')
 
+//search all registered vehicles
 router.get('/', (req, res) => {
     Vehicle.findAll()
     .then(vechicles => {
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
     })
 }),
 
+//insert a new vehicle through a frontend form
 router.post('/new', (req, res) => {
     const name = req.body.name;
     const brand = req.body.brand;
@@ -35,6 +37,7 @@ router.post('/new', (req, res) => {
     })
 })
 
+//delete a vehicle through a parameter id
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
     if(id !== undefined || id !== null) {
@@ -52,6 +55,7 @@ router.delete('/delete/:id', (req, res) => {
     }
 })
 
+//update a vehicle through data from a frontend form
 router.post('/update', (req, res) => {
     let id = req.body.id;
     let name = req.body.name;
@@ -75,11 +79,19 @@ router.post('/update', (req, res) => {
     })
 })
 
+//performs a dynamic search through a data entered in the parameter
 router.get('/query/:data', (req, res) => {
     let data = req.params.data;
+    
+    //make a query
+    db.query(`select id, name, brand, color, year, isFavorite, board from vehicles where (name like "%${data}%") or (brand like "%${data}%") or (color like "%${data}%") or (year like "%${data}%")`)
+    .then(results1 => {
+        //filter and replace repeated values
+        let values = results1.filter(function (a) {
+            return !this[JSON.stringify(a)] && (this[JSON.stringify(a)] = true);
+        }, Object.create(null))
 
-    db.query(`SELECT * FROM vehicles WHERE name LIKE "%${data}%"`).then(results => {
-        return res.status(200).json({results: results});
+        return res.status(200).json({vehicles: values});
     });
 })
 
