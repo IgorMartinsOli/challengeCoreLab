@@ -17,7 +17,7 @@ connection
         console.log(err);
     })
 
-app.use('/vechicles', vechicleController);
+app.use('/vehicles', vechicleController);
 
 app.listen(8008, () => {
         console.log('listening on 8008');

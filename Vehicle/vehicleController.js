@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Vehicle = require('./vechicle');
+const { QueryTypes } = require('sequelize');
+const Sequelize = require('sequelize');
+const db = require('../database/database')
 
 router.get('/', (req, res) => {
     Vehicle.findAll()
@@ -70,6 +73,14 @@ router.post('/update', (req, res) => {
     ).catch(err => {
         return res.status(400).json({msg: "Error updating vehicle", err: err.message});
     })
+})
+
+router.get('/query/:data', (req, res) => {
+    let data = req.params.data;
+
+    db.query(`SELECT * FROM vehicles WHERE name LIKE "%${data}%"`).then(results => {
+        return res.status(200).json({results: results});
+    });
 })
 
 module.exports = router;
