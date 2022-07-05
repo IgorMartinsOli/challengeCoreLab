@@ -3,7 +3,7 @@ const router = express.Router();
 const Vehicle = require('./vechicle');
 const { QueryTypes } = require('sequelize');
 const Sequelize = require('sequelize');
-const db = require('../database/database')
+const db = require('../database/database');
 
 //search all registered vehicles
 router.get('/', (req, res) => {

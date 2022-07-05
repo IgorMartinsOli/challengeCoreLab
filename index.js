@@ -19,6 +19,6 @@ connection
 
 app.use('/vehicles', vechicleController);
 
-app.listen(8008, () => {
-        console.log('listening on 8008');
+app.listen(3000, () => {
+        console.log('listening on 3000');
 });
