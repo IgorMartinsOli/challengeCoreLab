@@ -72,7 +72,7 @@ router.post('/update', (req, res) => {
         board: board},
         {where:{id: id}
     }).then(() => {
-            return res.status(200).json({msg: "Success when updating vehicle"})
+            return res.status(200).json({msg: "Success when updating vehicle"});
         }
     ).catch(err => {
         return res.status(400).json({msg: "Error updating vehicle", err: err.message});
@@ -93,6 +93,19 @@ router.get('/query/:data', (req, res) => {
 
         return res.status(200).json({vehicles: values});
     });
+})
+
+router.post('/favorite/:id', function (req, res) {
+    let id = req.params.id;
+
+    Vehicle.updateOne({
+        isFavorite: true
+    },{where: {id: id}}
+    ).then(() => {
+        return res.status(200).json({msg: 'Favoritado'});
+    }).catch(err => {
+        return res.status(400).json({msg: err.message});
+    })
 })
 
 module.exports = router;
