@@ -31,7 +31,7 @@ router.post('/new', (req, res) => {
         board: board,
         isFavorite: false
     }).then(sucess =>{
-        return res.status(200).json({msg:"success adding book"});
+        return res.status(201).json({msg:"success adding book"});
     }).catch(err => {
         return res.status(400).json({msg: "Error creating vehicle", err: err.message});
     })
@@ -47,7 +47,7 @@ router.delete('/delete/:id', (req, res) => {
             }).then(() => {
                 return res.status(200).json({msg: "Vehicle destroyed successfully"});
             }).catch(err => {
-                return res.status(400).json({msg: "Unable to delete vehicle", err: err.message});
+                return res.status(410).json({msg: "Unable to delete vehicle", err: err.message});
             })
         }
     }else{
@@ -98,11 +98,11 @@ router.get('/query/:data', (req, res) => {
 router.post('/favorite/:id', function (req, res) {
     let id = req.params.id;
 
-    Vehicle.updateOne({
+    Vehicle.update({
         isFavorite: true
     },{where: {id: id}}
     ).then(() => {
-        return res.status(200).json({msg: 'Favoritado'});
+        return res.status(200).json({msg: 'Favoritade'});
     }).catch(err => {
         return res.status(400).json({msg: err.message});
     })

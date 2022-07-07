@@ -32,4 +32,8 @@ app.use(function (err, req, res, next){
     .json({error: err.message || "INTERNAL ERROR"});
 });
 
+app.listen(3001, () => {
+    console.log('listening on 3001');
+}); 
+
 module.exports = app;
