@@ -1,38 +1,38 @@
-Tecnologias:
-"body-parser": "^1.20.0",
-"chai": "^4.3.6",
-"chai-http": "^4.3.0",
-"cors": "^2.8.5",
-"express": "^4.18.1",
-"mocha": "^10.0.0",
-"mysql2": "^2.3.3",
-"nodemon": "^2.0.18",
-"sequelize": "^6.21.2"
+Tecnologias:<br>
+"body-parser": "^1.20.0",<br>
+"chai": "^4.3.6",<br>
+"chai-http": "^4.3.0",<br>
+"cors": "^2.8.5",<br>
+"express": "^4.18.1",<br>
+"mocha": "^10.0.0",<br>
+"mysql2": "^2.3.3",<br>
+"nodemon": "^2.0.18",<br>
+"sequelize": "^6.21.2"<br>
 
-Tipos de dados do veiculo:
+Tipos de dados do veiculo:<br>
+name: STRING(60)<br>
+brand: STRING(60)<br>
+color: STRING(30)<br>
+year: INTEGER<br>
+board: STRING(7)<br>
+isFavorite: BOOLEAN<br>
 
-name: STRING(60)
-brand: STRING(60)
-color: STRING(30)
-year: INTEGE
-board: STRING(7)
-isFavorite: BOOLEAN
+Rotas:<br>
+GET /vehicles<br>
+Retorna todos os veiculos<br><br>
 
-Rotas:
-GET /vehicles
-Retorna todos os veiculos
+POST /vehicles/new<br>
+Recebe do body os dados(name, brand, color, year, board) e persiste o objeto no BD<br><br>
 
-POST /vehicles/new
-Recebe do body os dados(name, brand, color, year, board) e persiste o objeto no BD
+DELETE /vehicles/delete:id<br>
+Recebe do params um id e delete<br><br>
 
-DELETE /vehicles/delete:id
-Recebe do params um id e delete
+POST /vehicles/update<br>
+Recebe do body os dados(name, brand, color, year, board) e persiste atualiza o objeto no BD<br><br>
 
-POST /vehicles/update
-Recebe do body os dados(name, brand, color, year, board) e persiste atualiza o objeto no BD
+GET /vehicles/query/:data<br>
+Recebe do params um dado, e faz a pesquisa em todos os campos, ele retorna todos os objetos que em alguma coluna tem o dado passado.<br><br>
 
-GET /vehicles/query/:data
-Recebe do params um dado, e faz a pesquisa em todos os campos, ele retorna todos os objetos que em alguma coluna tem o dado passado.
 ___________________________________________________________________________________________________________________________________________________________________
 Desafio CoreLab: 
 
