@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     .then(vechicles => {
         return res.status(200).json(vechicles);
     }).catch(err => {
-        return res.status(204).json({msg: "Error when searching for vehicles", err: err.message});
+        return res.status(203).json({msg: "Error when searching for vehicles", err: err.message});
     })
 }),
 
